@@ -7,7 +7,7 @@ const getTransactionPool = () => {
     return _.cloneDeep(transactionPool);
 };
 
-const addToTransactionPool = (tx: Transaction, UnspentTxOut[]) => {
+const addToTransactionPool = (tx: Transaction, unspentTxOuts: UnspentTxOut[]) => {
     if(!validateTransaction(tx, unspentTxOuts)) {
         throw Error('Trying to add invalid tx to pool');
     }
@@ -43,7 +43,7 @@ const updateTransactionPool = (unspentTxOuts: UnspentTxOut[]) => {
     }
 };
 
-const getTxPoolIns = (aTransactionPool: Transaction[]): TxIn[] {
+const getTxPoolIns = (aTransactionPool: Transaction[]): TxIn[] => {
     return _(aTransactionPool)
         .map((tx) => tx.txIns)
         .flatten()
@@ -54,12 +54,12 @@ const isValidTxForPool = (tx: Transaction, aTransactionPool: Transaction[]): boo
     const txPoolIns: TxIn[] = getTxPoolIns(aTransactionPool);
 
     const containsTxIn = (txIns: TxIn[], txIn: TxIn) => {
-        return _.find(txPoolIns, ((txPoolIns) => {
-            return TxIn.txOutIndex === txPoolIn.txOutIndex && txIn.txOutId === txPoolIn.txOutId;
+        return _.find(txPoolIns, ((txPoolIn) => {
+            return txIn.txOutIndex === txPoolIn.txOutIndex && txIn.txOutId === txPoolIn.txOutId;
         }));
     };
 
-    for (const txIn of txIn.txIns) {
+    for (const txIn of tx.txIns) {
         if(containsTxIn(txPoolIns, txIn)) {
             console.log('txIn already found in the txPool');
             return false;

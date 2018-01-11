@@ -123,7 +123,7 @@ const generatenextBlockWithTransaction = (receiverAddress: string, amount: numbe
 		throw Error('invalid amount');
 	}
 	const coinbaseTx: Transaction = getCoinbaseTransaction(getPublicFromWallet(), getLatestBlock().index+1);
-	const tx: Transaction = createTransaction(receiverAddress, amount, getPrivateFromWallet(), unspentTxOuts);
+	const tx: Transaction = createTransaction(receiverAddress, amount, getPrivateFromWallet(), getUnspentTxOuts(), getTransactionPool());
 	const blockData: Transaction[] = [coinbaseTx, tx];
 	return generateRawNextBlock(blockData);
 }

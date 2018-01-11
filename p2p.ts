@@ -84,10 +84,10 @@ const initMessageHandler = (ws: WebSocket) => {
 				}
 					receivedTransactions.forEach((transaction: Transaction) => {
 					try {
-						handleReceivedTransaction(Transaction);
+						handleReceivedTransaction(transaction);
 						//if no error is thrown, transaction was indeed added to the pool
 						//lets broadcast transaction pool
-						broadcastTransactionPool();
+						broadCastTransactionPool();
 					} catch (e) {
 						console.log(e.message);
 					}

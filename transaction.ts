@@ -336,8 +336,9 @@ const isValidAddress = (address: string): boolean => {
 	return true;
 };
 
+
 export {
-    processTransactions, signTxIn, getTransactionId,
-    UnspentTxOut, TxIn, TxOut, getCoinbaseTransaction, getPublicKey,
-    Transaction, isValidAddress
-}
+    processTransactions, signTxIn, getTransactionId, isValidAddress, validateTransaction,
+    UnspentTxOut, TxIn, TxOut, getCoinbaseTransaction, getPublicKey, hasDuplicates,
+    Transaction
+};
